@@ -5,8 +5,8 @@ const path = require("path");
 //get the public path to the file
 const publicFolder = path.join(__dirname, "./public");
 // set the public folder path, from this point our file are placed,
-//is helping to incorporate the style withouth the necessity of using express static
-// app.use(express.static("public"));
+// is helping to incorporate the style withouth the necessity of using express static
+app.use(express.static("public"));
 // do not forget to insert css link in index file whtiout relative path
 // just inser style file
 
@@ -17,9 +17,9 @@ app.set("view engine", "hbs");
 
 //#################for case when we want to change the name of the views folder#############################
 // we need to change the name path for the current folder using
-// const newVewsPath = path.join(__dirname, "./newViewsFolderName");
+const newVewsPath = path.join(__dirname, "./newViewsFolderName");
 // a this time is necesary to have set a view engine for hbs
-// app.set("views", newVewsPath);
+app.set("views", newVewsPath);
 
 //for partials used for footers and headers to create once
 // and use multiple times
@@ -39,6 +39,10 @@ app.get("/", (req, res) => {
   //and for dinamic template we seend an value of string to the hbs file
 });
 
+//for  404 webpage
+app.get("*", (req, res) => {
+  res.send("404 web page");
+});
 //open the port for our server
 app.listen(8080, function () {
   console.log("port opened  on  8080 ");
