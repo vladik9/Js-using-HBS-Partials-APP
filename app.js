@@ -11,8 +11,8 @@ const publicFolder = path.join(__dirname, "./public");
 // just inser style file
 
 app.use(express.static(publicFolder));
-// for view engine using handlebar lika ejs templates
-//need to have a viewd folder whit currettly files ended in hbs extension
+// for view engine using handlebar like ejs templates
+//need to have a views folder whit currettly files ended in hbs extension
 app.set("view engine", "hbs");
 
 //#################for case when we want to change the name of the views folder#############################
@@ -21,7 +21,7 @@ app.set("view engine", "hbs");
 // a this time is necesary to have set a view engine for hbs
 // app.set("views", newVewsPath);
 
-//for partials used for footers and headers to create once and
+//for partials used for footers and headers to create once
 // and use multiple times
 //########################## partials
 // require hbs module for partials
@@ -30,10 +30,12 @@ const hbs = require("hbs");
 const partialHbsPath = path.join(__dirname, "./waiToThePArtialFIles");
 //configure the hbs for location of the partials files
 hbs.registerPartials(partialHbsPath);
+//inside the index hbs file we need to incorporeate the partials files
+//{{>partialFileName}}
 //################################################################
 // for correct working via hbs and ejs is requred a get method
 app.get("/", (req, res) => {
-  res.render("index", { userValue: "Some value" }); // just index whitout the extension
+  res.render("index", { userValue: "Some value" }); // just index without the extension
   //and for dinamic template we seend an value of string to the hbs file
 });
 
