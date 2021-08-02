@@ -17,7 +17,7 @@ app.set("view engine", "hbs");
 
 //#################for case when we want to change the name of the views folder#############################
 // we need to change the name path for the current folder using
-const newVewsPath = path.join(__dirname, "./newViewsFolderName");
+const newVewsPath = path.join(__dirname, "./appViewsPages");
 // a this time is necesary to have set a view engine for hbs
 app.set("views", newVewsPath);
 
@@ -27,7 +27,7 @@ app.set("views", newVewsPath);
 // require hbs module for partials
 const hbs = require("hbs");
 // get the file location for our partials files
-const partialHbsPath = path.join(__dirname, "./waiToThePArtialFIles");
+const partialHbsPath = path.join(__dirname, "./appViewsPages");
 //configure the hbs for location of the partials files
 hbs.registerPartials(partialHbsPath);
 //inside the index hbs file we need to incorporeate the partials files
@@ -39,10 +39,19 @@ app.get("/", (req, res) => {
   //and for dinamic template we seend an value of string to the hbs file
 });
 
+// in case we want to use fetch function for client side api requests
+// we need to include the get method for the browser in main js file like
+//api.js
+app.get("/fetch.js", (req, res) => {
+  res.sendFile(__dirname + "/fetch.js"); // a second js file
+}); // do not forget to include the script src in html file
+// to for creating a get request to server
+
 //for  404 webpage
 app.get("*", (req, res) => {
   res.send("404 web page");
 });
+
 //open the port for our server
 app.listen(8080, function () {
   console.log("port opened  on  8080 ");
